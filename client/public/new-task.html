@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Task</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="new-task.css"> <!-- New Task 페이지 스타일 -->
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="header-content">
+                <button id="back-button" class="nav-button">◀</button>
+                <h1>New Task</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-form">
+                <label for="category">Category</label>
+                <div class="category-container">
+                    <input type="text" id="category-input" placeholder="Enter category">
+                    <button id="add-category-btn" class="small-button">+</button>
+                </div>
+                <div class="category-list">
+                    <button class="category-item">운동</button>
+                    <button class="category-item">과제</button>
+                    <button class="category-item">공부</button>
+                </div>
+
+                <label for="memo">Memo</label>
+                <div class="memo-container">
+                    <textarea id="memo-input" placeholder="Enter memo"></textarea>
+                    <button id="add-memo-btn" class="small-button">+</button>
+                </div>
+
+                <!-- 메모 리스트를 표시할 공간 -->
+                <div id="schedule-list"></div>
+                
+                <button id="done-btn" class="action-button">Done</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript 파일 로드 -->
+    <script src="../src/js/newTask.js"></script>
+    <script>
+        document.getElementById('back-button').addEventListener('click', () => {
+            history.back();  // 이전 페이지로 돌아가기
+        });
+    </script>
+</body>
+</html>

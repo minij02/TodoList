@@ -1,0 +1,119 @@
+/* 기본적인 전체 레이아웃 설정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#calendar {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.month-header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.week-days, .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 설정 */
+    text-align: center;
+}
+
+.date-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.date-cell:hover {
+    background-color: #e0f7fa;
+}
+
+.date-cell[data-date]:not(.empty) {
+    position: relative;
+}
+
+.date-cell[data-date]::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: #28a745;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.date-cell.completed[data-date]::after {
+    opacity: 1;
+}
+
+/* 달성률에 따른 명도 조절 (기본적으로 흰색에서 시작) */
+.date-cell[data-date].brightness-1 {
+    background-color: #ffffff;
+}
+
+.date-cell[data-date].brightness-2 {
+    background-color: #e0e0e0;
+}
+
+.date-cell[data-date].brightness-3 {
+    background-color: #c0c0c0;
+}
+
+.date-cell[data-date].brightness-4 {
+    background-color: #a0a0a0;
+}
+
+.date-cell[data-date].brightness-5 {
+    background-color: #808080;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.schedule-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+#schedule-list {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

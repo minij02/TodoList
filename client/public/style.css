@@ -1,0 +1,144 @@
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 애플리케이션 레이아웃 */
+#app {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #007BFF;
+}
+
+.month-header {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* 요일 및 날짜 그리드 설정 */
+.week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 그리드 설정 */
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 그리드 설정 */
+}
+
+/* 날짜 셀 스타일 */
+.date-cell {
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.date-cell:hover {
+    background-color: #f0f0f0;
+}
+
+.date-cell.empty {
+    background-color: #f9f9f9;
+    cursor: default;
+}
+
+.month-navigation {
+    margin-top: 10px;
+}
+
+.month-navigation button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.month-navigation button:hover {
+    background-color: #0056b3;
+}
+
+/* 메인 섹션 스타일 */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#calendar {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 10px;
+}
+
+#schedule-list {
+    width: 100%;
+    max-width: 600px;
+}
+
+#create-new-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#create-new-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer p {
+    font-size: 0.8em;
+    color: #888;
+}

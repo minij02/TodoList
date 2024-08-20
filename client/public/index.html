@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>TodoList</h1>
+            <div class="month-navigation">
+                <button id="prevMonth">◀ 이전 달</button>
+                <button id="nextMonth">다음 달 ▶</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="calendar"></div>
+            <div id="schedule-list"></div>
+            <!-- Create New 버튼을 위한 컨테이너 -->
+            <div id="create-new-container" style="display: none; text-align: center; margin-top: 10px;">
+                <button id="create-new-btn">Create New +</button>
+                <button id="test">test</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>TodoList App - All rights reserved © 2024</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript 파일 로드 -->
+    <script src="../src/js/utils.js"></script>
+    <script src="../src/js/api.js"></script>
+    <script src="../src/js/schedule.js"></script>
+    <script src="../src/js/date.js"></script>
+    <script src="../src/js/calendar.js"></script>
+    <script src="../src/js/app.js"></script>
+</body>
+</html>
