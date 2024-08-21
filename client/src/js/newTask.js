@@ -1,5 +1,9 @@
 // 카테고리와 메모를 저장할 배열
-let categories = [];
+let categories = [
+    { name: '운동', active: false },
+    { name: '과제', active: false },
+    { name: '공부', active: false }
+];
 let memos = [];
 
 // 카테고리 추가 버튼 클릭 이벤트
@@ -8,7 +12,7 @@ document.getElementById('add-category-btn').addEventListener('click', () => {
     const categoryValue = categoryInput.value.trim();
 
     if (categoryValue) {
-        categories.push(categoryValue);
+        categories.push({name: categoryValue, active: false});
         renderCategories();
 
         // 입력 필드 초기화
@@ -38,7 +42,7 @@ function renderCategories() {
     categories.forEach(category => {
         const categoryItem = document.createElement('button');
         categoryItem.classList.add('category-item');
-        categoryItem.textContent = category;
+        categoryItem.textContent = category.name;
 
         // 카테고리 클릭 시 활성화 상태를 변경하는 이벤트 리스너 추가
         categoryItem.addEventListener('click', () => {
