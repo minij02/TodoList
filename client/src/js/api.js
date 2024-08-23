@@ -2,7 +2,7 @@
 // 서버로부터 일정을 가져오는 함수
 
 // `date`라는 인수를 받아서 이 날짜와 관련된 일정을 가져옴
-async function fetchSchedules(date) {
+export async function fetchSchedules(date) {
     // 서버의 `api\schedules` 엔드포인트에 `GET` 요청을 보냄
     // 이후 `fetch` 가 반환하는 프로미스를 기다림. 서버의 응답을 받을 때까지 코드 실행 일시 중지
     const response = await fetch(`/api/schedules?date=${date}`);
@@ -11,7 +11,7 @@ async function fetchSchedules(date) {
 }
 
 // 새 일정을 생성하는 함수
-async function createSchedule(schedule) {
+export async function createSchedule(schedule) {
     try {
         const response = await fetch('http://localhost:5000/api/schedules', {
             method: 'POST',
@@ -36,7 +36,7 @@ async function createSchedule(schedule) {
 }
 
 // 일정을 업데이트하는 함수
-async function updateSchedule(schedule) {
+export async function updateSchedule(schedule) {
     const response = await fetch(`/api/schedules/${schedule.id}`, {
         method: 'PUT',
         headers: {
@@ -53,7 +53,7 @@ async function updateSchedule(schedule) {
 }
 
 // 일정을 삭제하는 함수
-async function deleteSchedule(id) {
+export async function deleteSchedule(id) {
     const response = await fetch(`/api/schedules/${id}`, {
         method: 'DELETE'
     });
@@ -64,28 +64,3 @@ async function deleteSchedule(id) {
 
     return response.json();
 }
-
-
-document.getElementById("test").addEventListener('click', async ()=>{
-  const schedule = {
-    "test": "This is a test payload"
-};
-        const response = await fetch('http://localhost:5000/api/test-post', {
-            method: 'POST',
-            //mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(schedule)
-        });
-        console.log(response);
-        if (!response.ok) { //error
-            console.error('Server response:', await response.text());
-            throw new Error('Failed to create schedule');
-        }
-        //sucess
-        const data = await response.json();
-        console.log('Schedule created:', data);
-        return data;
-      
-})

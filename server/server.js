@@ -31,20 +31,10 @@ app.use('/api/schedules', (req, res, next) => {
 
 // 라우트 설정
 console.log('라우트설정');
-app.use('/api/schedules', scheduleRoutes);
+//
+//클라이언트가 `/api/schedules` 경로로 HTTP 요청을 보낼 때 요청을 `scheduleRoutes` 라우터로 전달
+app.use('/api/schedules', scheduleRoutes); 
 app.use('/api/categories', categoryRoutes);
-
-// 테스트용 GET 라우트 (브라우저에서 테스트 가능)
-app.get('/test', (req, res) => {
-    res.send('Test route is working!');
-});
-
-// 테스트용 POST 라우트 (Postman에서 테스트 가능)
-app.post('/api/test-post', (req, res) => {
-    console.log('test-post');
-    console.log('Received a POST request at /api/test-post:', req.body);
-    res.send('POST request to /api/test-post was successful!');
-});
 
 // 서버 실행
 const PORT = process.env.PORT || 5000;

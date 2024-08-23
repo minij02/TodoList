@@ -1,5 +1,3 @@
-console.log("scheduleRouter.js");
-
 const express = require('express');
 const router = express.Router();
 const {
@@ -17,7 +15,7 @@ router.stack.forEach(layer => {
         const path = layer.route.path;
         const methods = Object.keys(layer.route.methods).join(', ').toUpperCase();
         console.log(`Method(s): ${methods}, Path: ${path}`);
-    }
+    }  
 });
 // 일정 추가
 router.post('/', addSchedule);

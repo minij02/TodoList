@@ -1,3 +1,4 @@
+import { createSchedule } from './api.js';
 // 카테고리와 메모를 저장할 배열
 let categories = [
     { name: '운동', active: false },
@@ -97,23 +98,22 @@ function renderMemos() {
 
 // Done 버튼 클릭 이벤트 - MongoDB로 데이터 저장
 document.getElementById('done-btn').addEventListener('click', async () => {
+
     const date = new Date().toISOString().split('T')[0]; // 현재 날짜
+   
+    const title = categories.length > 0 ? categories[0].name : "Untitled"; // 첫 번째 카테고리 이름
+    const description = memos.length > 0 ? memos[0] : "No Description"; // 첫 번째 메모
     const data = {
+        title,
+        description,
         date,
-        categories,
-        memos
+        isCompleted: false
     };
 
     try {
-        const response = await fetch('http://localhost:5000/api/schedules', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+        const response = await createSchedule(data);
 
-        if (response.ok) {
+        if (response && response._id) { // ID가 존재하는지 확인; response.ok가 true로 평가되지 않으면 Failed to save data 오류가 발생
             alert('Data saved successfully!');
             categories = [];
             memos = [];
