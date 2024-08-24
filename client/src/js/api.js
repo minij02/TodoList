@@ -5,7 +5,7 @@
 export async function fetchSchedules(date) {
     // 서버의 `api\schedules` 엔드포인트에 `GET` 요청을 보냄
     // 이후 `fetch` 가 반환하는 프로미스를 기다림. 서버의 응답을 받을 때까지 코드 실행 일시 중지
-    const response = await fetch(`/api/schedules?date=${date}`);
+    const response = await fetch(`http://localhost:5000/api/schedules?date=${date}`);
     //응답을 JSON 형태로 파싱하여 반환
     return response.json();
 }
@@ -37,7 +37,7 @@ export async function createSchedule(schedule) {
 
 // 일정을 업데이트하는 함수
 export async function updateSchedule(schedule) {
-    const response = await fetch(`/api/schedules/${schedule.id}`, {
+    const response = await fetch(`http://localhost:5000/api/schedules/${schedule.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ export async function updateSchedule(schedule) {
 
 // 일정을 삭제하는 함수
 export async function deleteSchedule(id) {
-    const response = await fetch(`/api/schedules/${id}`, {
+    const response = await fetch(`http://localhost:5000/api/schedules/${id}`, {
         method: 'DELETE'
     });
 

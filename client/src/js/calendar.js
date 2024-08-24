@@ -1,8 +1,9 @@
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 
-function renderCalendar() {
+export function renderCalendar() {
     const calendar = document.getElementById("calendar");
+    console.log("Rendering calendar:", calendar);
     calendar.innerHTML = generateCalendarHTML(currentYear, currentMonth);
 }
 
@@ -47,7 +48,7 @@ function generateCalendarHTML(year, month) {
     return html;
 }
 
-function showPreviousMonth() {
+export function showPreviousMonth() {
     currentMonth--;
     if (currentMonth < 0) {
         currentMonth = 11;
@@ -56,7 +57,7 @@ function showPreviousMonth() {
     renderCalendar();
 }
 
-function showNextMonth() {
+export function showNextMonth() {
     currentMonth++;
     if (currentMonth > 11) {
         currentMonth = 0;

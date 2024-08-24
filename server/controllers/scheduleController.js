@@ -18,8 +18,15 @@ exports.addSchedule = async (req, res) => {
 // 일정 조회
 exports.getSchedules = async (req, res) => {
     try {
-        const schedules = await Schedule.find();
-        res.status(200).json(schedules);
+        const { date } = req.query;
+        
+       let schedules;
+       if (date) {
+        schedules = await Schedule.find({date: new Date(date)});
+       } else {
+        schedules = await Schedule.find();
+       }
+       res.status(200).json(schedules);
     } catch (error) {
         res.status(500).json({ message: '일정 조회 실패', error });
     }
