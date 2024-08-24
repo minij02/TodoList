@@ -61,7 +61,21 @@ export async function displayScheduleForDate(date) {
         schedules.forEach(schedule => {
             const scheduleItem = document.createElement("div");
             scheduleItem.className = "schedule-item";
-            scheduleItem.textContent = schedule.title;
+
+            // 일정 제목을 위한 div
+            const titleElement = document.createElement("div");
+            titleElement.textContent = schedule.title;
+
+            // 일정 설명을 위한 div (작은 글씨)
+            const descriptionElement = document.createElement("div");
+            descriptionElement.textContent = schedule.description;
+            descriptionElement.style.fontSize = "small"; // 작은 글씨로 설정
+            descriptionElement.style.color = "gray"; // 회색으로 설정 (선택 사항)
+
+            // titleElement와 descriptionElement를 scheduleItem에 추가
+            scheduleItem.appendChild(titleElement);
+            scheduleItem.appendChild(descriptionElement);
+
             scheduleList.appendChild(scheduleItem);
         });
     } else {
