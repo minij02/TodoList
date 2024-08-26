@@ -37,7 +37,11 @@ export async function createSchedule(schedule) {
 
 // 일정을 업데이트하는 함수
 export async function updateSchedule(schedule) {
-    const response = await fetch(`http://localhost:5000/api/schedules/${schedule.id}`, {
+    if (!schedule._id) {
+        console.error('Cannot update schedule: _id is undefined.');
+        return;
+    }
+    const response = await fetch(`http://localhost:5000/api/schedules/${schedule._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

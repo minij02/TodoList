@@ -1,10 +1,45 @@
+import { fetchSchedules } from './api.js'
+
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 
-export function renderCalendar() {
+function calculateAchievementRate(schedules) {
+    if (schedules.length === 0) return 0;
+    const completedCount = schedules.filter(schedule => schedule.isCompleted).length;
+    return (completedCount / schedules.length) * 100;
+}
+
+function getColorForAchievementRate(rate) {
+    if (rate <= 20) return '#FFCCCC'; 
+    if (rate <= 40) return '#FF9999'; 
+    if (rate <= 60) return '#FF6666'; 
+    if (rate <= 80) return '#FF3333'; 
+    if (rate <= 100) return '#FF0000'; 
+}
+
+export async function renderCalendar() {
     const calendar = document.getElementById("calendar");
     console.log("Render Calendar");
     calendar.innerHTML = generateCalendarHTML(currentYear, currentMonth);
+
+    // 각 날짜별 성취도를 계산하고 색생을 설정
+    const dateCells = calendar.querySelectorAll('.date-cell');
+    for (let cell of dateCells) {
+        const date = cell.dataset.date;
+
+        if (date) {
+            const schedules = await fetchSchedules(date);
+            if (schedules.length > 0) {
+                const achievementRate = calculateAchievementRate(schedules)
+                const color = getColorForAchievementRate(achievementRate);
+                cell.style.backgroundColor = color;
+            } else {
+                // 일정이 없을 경우 색상 설정을 하지 않음
+                cell.style.backgroundColor = '';  // 기본 색상으로 설정
+            }
+
+        }
+    }
 }
 
 function generateCalendarHTML(year, month) {

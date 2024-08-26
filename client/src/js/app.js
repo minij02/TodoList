@@ -1,5 +1,5 @@
 import { renderCalendar, showPreviousMonth, showNextMonth } from './calendar.js';
-import { fetchSchedules } from './api.js';
+import { fetchSchedules, deleteSchedule, updateSchedule } from './api.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const calendarElement = document.getElementById("calendar");
@@ -71,13 +71,19 @@ export async function displayScheduleForDate(date) {
              const checkbox = document.createElement("input");
              checkbox.type = "checkbox";
              checkbox.checked = schedule.isCompleted;
+             checkbox.className = "custom-checkbox";
              checkbox.style.marginRight = "10px";
 
-             checkbox.className = "custom-checkbox";
              checkbox.addEventListener("change", async () => {
+                //schedule에 _id가 있는지 확인
+                if (!schedule._id) {
+                    console.log("Schedue ID is missing:", schedule);
+                    return;
+                }
                  schedule.isCompleted = checkbox.checked;
                  try {
                      await updateSchedule(schedule); // 완료 여부를 서버에 업데이트
+                     console.log("Schedule updated!");
                  } catch (error) {
                      console.error('Error updating schedule:', error);
                  }
@@ -87,7 +93,7 @@ export async function displayScheduleForDate(date) {
             const textContainer = document.createElement("div");
             textContainer.style.display = "flex";
             textContainer.style.flexDirection = "column"; // 텍스트를 수직 정렬
-            
+
             // 일정 제목을 위한 div
             const titleElement = document.createElement("div");
             titleElement.textContent = schedule.title;
@@ -103,10 +109,24 @@ export async function displayScheduleForDate(date) {
            textContainer.appendChild(titleElement);
            textContainer.appendChild(descriptionElement);
 
+            // 삭제 버튼 추가
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML = '🗑️'; // 쓰레기통 이모지 사용
+            deleteButton.style.marginRight = "auto"; // 오른쪽 끝으로 밀어내기
+            deleteButton.addEventListener("click", async () => {
+                console.log('Delete button clicked for schedule:', schedule._id);
+                try {
+                    await deleteSchedule(schedule._id); // 서버에서 일정 삭제
+                    displayScheduleForDate(date); // 삭제 후 일정 다시 불러오기
+                } catch (error) {
+                    console.error('Error deleting schedule:', error);
+                }
+            });
+
            // checkbox와 textContainer를 scheduleItem에 추가
            scheduleItem.appendChild(checkbox);
            scheduleItem.appendChild(textContainer);
-
+           scheduleList.appendChild(deleteButton);
            scheduleList.appendChild(scheduleItem);
         });
     } else {

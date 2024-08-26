@@ -69,8 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response && response._id) { 
                 alert('Data saved successfully!');
-                categories = [];
-                memos = [];
                 renderCategories();
                 renderMemos();
             } else {
