@@ -113,9 +113,25 @@ main {
     padding: 10px;
 }
 
+#schedule-container {
+    display: flex;
+    align-items: flex-start;
+}
+
 #schedule-list {
-    width: 100%;
-    max-width: 600px;
+    flex: 1;
+}
+
+#create-new-container {
+    margin-left: 20px;
+}
+
+#schedule-container.no-schedule {
+    justify-content: center; /* 일정이 없을 때 버튼을 중앙에 배치 */
+}
+
+#schedule-container.no-schedule #create-new-container {
+    margin-left: 0;
 }
 
 #create-new-btn {

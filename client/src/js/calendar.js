@@ -3,7 +3,7 @@ let currentYear = new Date().getFullYear();
 
 export function renderCalendar() {
     const calendar = document.getElementById("calendar");
-    console.log("Rendering calendar:", calendar);
+    console.log("Render Calendar");
     calendar.innerHTML = generateCalendarHTML(currentYear, currentMonth);
 }
 

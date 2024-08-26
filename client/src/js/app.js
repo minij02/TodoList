@@ -51,6 +51,7 @@ export async function displayScheduleForDate(date) {
     const createNewContainer = document.getElementById("create-new-container");
 
     const schedules = await fetchSchedules(date);
+    console.log("Fetched schedules:", schedules); // 데이터를 로그로 출력
 
     // 기존 일정 목록 초기화
     scheduleList.innerHTML = '';

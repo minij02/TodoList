@@ -14,11 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // 카테고리와 메모를 저장할 배열
-    let categories = [
-        { name: '운동', active: false },
-        { name: '과제', active: false },
-        { name: '공부', active: false }
-    ];
+    let categories = [];
     let memos = [];
 
     // 카테고리 추가 버튼 클릭 이벤트
@@ -77,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 memos = [];
                 renderCategories();
                 renderMemos();
-                selectedDate = null;
             } else {
                 throw new Error('Failed to save data');
             }
