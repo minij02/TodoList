@@ -18,6 +18,7 @@ exports.addSchedule = async (req, res) => {
 // 일정 조회
 exports.getSchedules = async (req, res) => {
     try {
+        console.log("getSchedules");
         const { date } = req.query;
         
        let schedules;
@@ -34,6 +35,7 @@ exports.getSchedules = async (req, res) => {
 
 // 일정 수정
 exports.updateSchedule = async (req, res) => {
+    console.log("updateSchedule");
     const { id } = req.params;
     const { title, description, isCompleted } = req.body;
 
@@ -51,6 +53,7 @@ exports.updateSchedule = async (req, res) => {
 
 // 일정 삭제
 exports.deleteSchedule = async (req, res) => {
+    console.log("deleteSchedule");
     const { id } = req.params;
 
     try {

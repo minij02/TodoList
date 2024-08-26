@@ -57,12 +57,37 @@ export async function displayScheduleForDate(date) {
     scheduleList.innerHTML = '';
 
     if (schedules.length > 0) {
-        createNewContainer.style.display = 'none';
+        createNewContainer.style.display = 'inline-block';
+        createNewContainer.style.float = 'right';
+        createNewContainer.style.marginTop = '10px';
 
         schedules.forEach(schedule => {
             const scheduleItem = document.createElement("div");
             scheduleItem.className = "schedule-item";
+            scheduleItem.style.display = "flex";
+            scheduleItem.style.alignItemms = "center";
 
+             // 일정 완료 여부 체크박스
+             const checkbox = document.createElement("input");
+             checkbox.type = "checkbox";
+             checkbox.checked = schedule.isCompleted;
+             checkbox.style.marginRight = "10px";
+
+             checkbox.className = "custom-checkbox";
+             checkbox.addEventListener("change", async () => {
+                 schedule.isCompleted = checkbox.checked;
+                 try {
+                     await updateSchedule(schedule); // 완료 여부를 서버에 업데이트
+                 } catch (error) {
+                     console.error('Error updating schedule:', error);
+                 }
+             });
+
+             // 제목과 설명을 포함하는 컨테이너 div
+            const textContainer = document.createElement("div");
+            textContainer.style.display = "flex";
+            textContainer.style.flexDirection = "column"; // 텍스트를 수직 정렬
+            
             // 일정 제목을 위한 div
             const titleElement = document.createElement("div");
             titleElement.textContent = schedule.title;
@@ -71,13 +96,18 @@ export async function displayScheduleForDate(date) {
             const descriptionElement = document.createElement("div");
             descriptionElement.textContent = schedule.description;
             descriptionElement.style.fontSize = "small"; // 작은 글씨로 설정
-            descriptionElement.style.color = "gray"; // 회색으로 설정 (선택 사항)
+            descriptionElement.style.color = "gray"; // 회색으로 설정
+            descriptionElement.style.marginTop = "5px"; // 제목과 설명 간의 간격 추가
 
-            // titleElement와 descriptionElement를 scheduleItem에 추가
-            scheduleItem.appendChild(titleElement);
-            scheduleItem.appendChild(descriptionElement);
+           // textContainer에 titleElement와 descriptionElement를 추가
+           textContainer.appendChild(titleElement);
+           textContainer.appendChild(descriptionElement);
 
-            scheduleList.appendChild(scheduleItem);
+           // checkbox와 textContainer를 scheduleItem에 추가
+           scheduleItem.appendChild(checkbox);
+           scheduleItem.appendChild(textContainer);
+
+           scheduleList.appendChild(scheduleItem);
         });
     } else {
         createNewContainer.style.display = 'block';
