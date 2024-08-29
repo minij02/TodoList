@@ -93,27 +93,10 @@ body {
     background-color: #808080;
 }
 
-.schedule-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
 .schedule-item input[type="checkbox"] {
     margin-right: 10px;
 }
 
 .schedule-item:last-child {
     border-bottom: none;
-}
-
-#schedule-list {
-    width: 100%;
-    max-width: 600px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

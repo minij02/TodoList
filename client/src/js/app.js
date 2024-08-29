@@ -3,7 +3,13 @@ import { fetchSchedules, deleteSchedule, updateSchedule } from './api.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const calendarElement = document.getElementById("calendar");
+    const scheduleList = document.getElementById("schedule-list");
+    const createNewContainer = document.getElementById("create-new-container");
 
+    // 페이지 로드 시 scheduleList와 createNewContainer를 숨김
+    scheduleList.style.display = 'none';
+    createNewContainer.style.display = 'none';
+    
     console.log("DOM fully loaded and parsed");
     console.log("calendarElement:", calendarElement);
 
@@ -57,10 +63,11 @@ export async function displayScheduleForDate(date) {
     scheduleList.innerHTML = '';
 
     if (schedules.length > 0) {
+        scheduleList.style.display = 'block';
         createNewContainer.style.display = 'inline-block';
         createNewContainer.style.float = 'right';
         createNewContainer.style.marginTop = '10px';
-
+       
         schedules.forEach(schedule => {
             const scheduleItem = document.createElement("div");
             scheduleItem.className = "schedule-item";
@@ -112,7 +119,7 @@ export async function displayScheduleForDate(date) {
             // 삭제 버튼 추가
             const deleteButton = document.createElement("button");
             deleteButton.innerHTML = '🗑️'; // 쓰레기통 이모지 사용
-            deleteButton.style.marginRight = "auto"; // 오른쪽 끝으로 밀어내기
+            deleteButton.style.marginLeft = "auto"; // 오른쪽 끝으로 밀어내기
             deleteButton.addEventListener("click", async () => {
                 console.log('Delete button clicked for schedule:', schedule._id);
                 try {
@@ -130,6 +137,7 @@ export async function displayScheduleForDate(date) {
            scheduleList.appendChild(scheduleItem);
         });
     } else {
+        scheduleList.style.display = 'none';
         createNewContainer.style.display = 'block';
     }
 }
