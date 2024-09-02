@@ -119,6 +119,45 @@ export async function displayScheduleForDate(date) {
            textContainer.appendChild(descriptionElement);
            textContainer.appendChild(titleElement);
 
+<<<<<<< Updated upstream
+=======
+           // 수정 버튼 추가
+           const editButton = document.createElement("button");
+           editButton.innerHTML = '✏️'; // 연필 이모지 사용
+           editButton.style.marginRight = "10px"; // 삭제 버튼 왼쪽에 배치
+           editButton.addEventListener("click",  () => {
+            titleElement.style.display = "none";
+            descriptionElement.style.display = "none";
+            titleInput.style.display = "block";
+            descriptionInput.style.distplay = "block";
+            descriptionInput.focus(); // 수정 버튼 클릭 시 descriptionInput에 포커스
+           })
+        
+           // Enter 키를 눌렀을 때 수정 내용을 저장하는 이벤트 리스너 추가
+           const handleKeyPress = async (event) => {
+            if (event.key  === "Enter") {
+                schedule.title = titleInput.value;
+                schedule.description = descriptionInput.value;
+                titleElement.textContent = schedule.title;
+                descriptionElement.textContent = schedule.description;
+                titleElement.style.display = "block";
+                descriptionElement.style.display = "block";
+                titleInput.style.display = "none";
+                descriptionInput.style.display = "none";
+                try {
+                    await updateSchedule(schedule); // 수정된 데이터를 서버에 업데이트
+                    console.log("Schedule  updated!");
+                    displayScheduleForDate(date); // 수정 후 일정 다시 불러오기
+                } catch (error)  {
+                    console.error('Error updating schedule: ', error);
+                }
+            }
+           }
+
+           titleInput.addEventListener("keyup", handleKeyPress);
+           descriptionInput.addEventListener("keyup", handleKeyPress);
+
+>>>>>>> Stashed changes
             // 삭제 버튼 추가
             const deleteButton = document.createElement("button");
             deleteButton.innerHTML = '🗑️'; // 쓰레기통 이모지 사용
