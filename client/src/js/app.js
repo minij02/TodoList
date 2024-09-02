@@ -73,6 +73,7 @@ export async function displayScheduleForDate(date) {
             scheduleItem.className = "schedule-item";
             scheduleItem.style.display = "flex";
             scheduleItem.style.alignItemms = "center";
+            scheduleItem.style.justifyContent  = "space-between"; // 좌우 간격을 띄워 배치
 
              // 일정 완료 여부 체크박스
              const checkbox = document.createElement("input");
@@ -98,28 +99,29 @@ export async function displayScheduleForDate(date) {
 
              // 제목과 설명을 포함하는 컨테이너 div
             const textContainer = document.createElement("div");
-            textContainer.style.display = "flex";
-            textContainer.style.flexDirection = "column"; // 텍스트를 수직 정렬
+            textContainer.style.flexGrow = "1"; // title과 description을 가운데 정렬
+            textContainer.style.textAlign = "center"; // 텍스트 가운데 정렬
+            // textContainer.style.display = "flex";
+            // textContainer.style.flexDirection = "column"; // 텍스트를 수직 정렬
 
-            // 일정 제목을 위한 div
-            const titleElement = document.createElement("div");
-            titleElement.textContent = schedule.title;
-
-            // 일정 설명을 위한 div (작은 글씨)
+            // 일정을 위한 div
             const descriptionElement = document.createElement("div");
             descriptionElement.textContent = schedule.description;
-            descriptionElement.style.fontSize = "small"; // 작은 글씨로 설정
-            descriptionElement.style.color = "gray"; // 회색으로 설정
-            descriptionElement.style.marginTop = "5px"; // 제목과 설명 간의 간격 추가
+
+            // 카테고리를 위한 div (작은 글씨)
+            const titleElement = document.createElement("div");
+            titleElement.textContent = schedule.title;
+            titleElement.style.fontSize = "small"; // 작은 글씨로 설정
+            titleElement.style.color = "gray"; // 회색으로 설정
+            titleElement.style.marginTop = "5px"; // 제목과 설명 간의 간격 추가
 
            // textContainer에 titleElement와 descriptionElement를 추가
-           textContainer.appendChild(titleElement);
            textContainer.appendChild(descriptionElement);
+           textContainer.appendChild(titleElement);
 
             // 삭제 버튼 추가
             const deleteButton = document.createElement("button");
             deleteButton.innerHTML = '🗑️'; // 쓰레기통 이모지 사용
-            deleteButton.style.marginLeft = "auto"; // 오른쪽 끝으로 밀어내기
             deleteButton.addEventListener("click", async () => {
                 console.log('Delete button clicked for schedule:', schedule._id);
                 try {
@@ -133,7 +135,8 @@ export async function displayScheduleForDate(date) {
            // checkbox와 textContainer를 scheduleItem에 추가
            scheduleItem.appendChild(checkbox);
            scheduleItem.appendChild(textContainer);
-           scheduleList.appendChild(deleteButton);
+           scheduleItem.appendChild(deleteButton);
+           
            scheduleList.appendChild(scheduleItem);
         });
     } else {
